@@ -1,0 +1,8 @@
+{
+  "name": "Lumina AI Workspace",
+  "description": "A high-performance AI productivity suite powered by the latest Gemini models, featuring code generation, image creation, vision analysis, and real-time voice interaction.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
