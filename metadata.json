@@ -1,0 +1,8 @@
+{
+  "name": "Preciseo Tax Services Inc - Production Ready Portal",
+  "description": "A comprehensive tax service platform featuring business and individual tax filing, bookkeeping, and planning, built with a modern, high-performance tech stack.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}
