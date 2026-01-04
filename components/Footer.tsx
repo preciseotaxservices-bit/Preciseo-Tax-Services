@@ -153,10 +153,10 @@ const Footer: React.FC = () => {
             <div className="space-y-6">
               <h4 className="text-sm font-black uppercase tracking-widest text-primary">Services</h4>
               <ul className="space-y-4">
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Individual Tax Filing</Link></li>
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">ITIN Application</Link></li>
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">FBAR & FATCA</Link></li>
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Tax Planning</Link></li>
+                <li><Link to="/services/individual-tax-filing" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Individual Tax Filing</Link></li>
+                <li><Link to="/services/itin-application" className="text-gray-500 hover:text-secondary transition-colors font-semibold">ITIN Application</Link></li>
+                <li><Link to="/services/fbar-fatca" className="text-gray-500 hover:text-secondary transition-colors font-semibold">FBAR & FATCA</Link></li>
+                <li><Link to="/services/tax-planning" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Tax Planning</Link></li>
               </ul>
             </div>
 
@@ -164,10 +164,10 @@ const Footer: React.FC = () => {
             <div className="space-y-6">
               <h4 className="text-sm font-black uppercase tracking-widest text-primary">Services</h4>
               <ul className="space-y-4">
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Business Tax Filing</Link></li>
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Business Formation</Link></li>
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Payroll Processing</Link></li>
-                <li><Link to="/services" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Bookkeeping</Link></li>
+                <li><Link to="/services/business-tax-filing" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Business Tax Filing</Link></li>
+                <li><Link to="/services/business-formation" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Business Formation</Link></li>
+                <li><Link to="/services/payroll-processing" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Payroll Processing</Link></li>
+                <li><Link to="/services/bookkeeping" className="text-gray-500 hover:text-secondary transition-colors font-semibold">Bookkeeping</Link></li>
               </ul>
             </div>
 

@@ -21,8 +21,12 @@ export interface FAQ {
 }
 
 export interface UserFormData {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
-  message: string;
+  timezone: string;
+  password?: string;
+  confirmPassword?: string;
+  message?: string;
 }

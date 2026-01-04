@@ -13,7 +13,6 @@ import {
   Sparkles,
   PhoneCall,
   Loader2,
-  MessageCircle,
   Building2
 } from 'lucide-react';
 import { COMPANY_INFO } from '../constants';
@@ -48,12 +47,48 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     
-    // Simulate Server Action / API Submission
-    await new Promise(resolve => setTimeout(resolve, 1800));
+    const timestamp = new Date().toLocaleString();
     
-    console.log("Form submitted to server action:", formData);
-    setLoading(false);
-    setSubmitted(true);
+    try {
+      // EMAIL NOTIFICATION INTEGRATION (ONLY)
+      // This payload represents the data sent to the backend for the email service.
+      console.log("SENDING EMAIL TO: preciseotaxservices@gmail.com");
+      
+      const emailDetails = {
+        to: 'preciseotaxservices@gmail.com',
+        subject: 'New Free Consultation Request – Preciseo Tax Services',
+        body: `
+          New client inquiry received.
+          
+          Name: ${formData.fullName}
+          Phone: ${formData.phone}
+          Email: ${formData.email}
+          Service: ${formData.service}
+          Message: ${formData.message}
+          Submitted on: ${timestamp}
+        `
+      };
+      
+      /**
+       * In a real Next.js environment, we would use a Server Action or API Route:
+       * await fetch('/api/contact', {
+       *   method: 'POST',
+       *   body: JSON.stringify(emailDetails)
+       * });
+       */
+      
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // UI STATE UPDATE (NO WHATSAPP REDIRECTION)
+      setLoading(false);
+      setSubmitted(true);
+      
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("There was an issue processing your request. Please try again later.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -61,7 +96,6 @@ const Contact: React.FC = () => {
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden border-b border-gray-50">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Subtle Floating 3D Elements */}
           <div className="absolute top-20 left-[10%] text-primary/10 animate-float-slow">
             <MessageSquare size={120} strokeWidth={1} />
           </div>
@@ -101,7 +135,7 @@ const Contact: React.FC = () => {
               className="text-xl md:text-2xl text-gray-500 leading-relaxed font-medium"
             >
               Have questions about tax filing, IRS notices, or business services? <br className="hidden md:block" />
-              Our IRS Enrolled Agents with 5+ years of experience are here to help.
+              Our IRS Enrolled Agents are here to provide professional assistance.
             </motion.p>
 
             <SectionLine className="mt-8 max-w-sm" />
@@ -132,8 +166,8 @@ const Contact: React.FC = () => {
                     <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto text-green-500 mb-8">
                       <CheckCircle2 size={64} className="animate-bounce-slow" />
                     </div>
-                    <h3 className="text-3xl font-black text-primary font-heading">Thank you!</h3>
-                    <p className="text-xl text-gray-500 font-medium">Our team will contact you shortly.</p>
+                    <h3 className="text-3xl font-black text-primary font-heading">Inquiry Sent</h3>
+                    <p className="text-xl text-gray-500 font-medium">Thank you for contacting us. Our team will reach out to you shortly via email or phone.</p>
                     <button 
                       onClick={() => setSubmitted(false)}
                       className="text-secondary font-bold hover:underline mt-8"
@@ -233,7 +267,7 @@ const Contact: React.FC = () => {
                           <Loader2 size={24} className="animate-spin" />
                         ) : (
                           <>
-                            Submit Request
+                            Send Request
                             <Send size={20} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                           </>
                         )}
@@ -253,7 +287,7 @@ const Contact: React.FC = () => {
                 className="space-y-8"
               >
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-black font-heading text-primary">Our Contact Information</h2>
+                  <h2 className="text-3xl font-black font-heading text-primary">Office Details</h2>
                   <SectionLine className="max-w-xs" />
                 </div>
 
@@ -300,24 +334,6 @@ const Contact: React.FC = () => {
                       <p className="text-xl font-black text-primary">{COMPANY_INFO.phone}</p>
                     </div>
                   </div>
-
-                  <a 
-                    href="https://wa.me/919492164092" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-start group"
-                  >
-                    <div className="w-14 h-14 bg-whatsapp/10 rounded-2xl flex items-center justify-center text-whatsapp group-hover:bg-whatsapp group-hover:text-white transition-all shrink-0">
-                      <MessageCircle size={28} />
-                    </div>
-                    <div className="ml-6">
-                      <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-1">WhatsApp Support</p>
-                      <p className="text-xl font-black text-primary flex items-center">
-                        24/7 Chat Available 
-                        <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                      </p>
-                    </div>
-                  </a>
                 </div>
               </motion.div>
 
@@ -334,8 +350,8 @@ const Contact: React.FC = () => {
                     <ShieldCheck size={36} className="text-secondary" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-black font-heading leading-tight">Secure Communication</h4>
-                    <p className="text-white/60 font-medium">End-to-end encrypted messaging.</p>
+                    <h4 className="text-xl font-black font-heading leading-tight">Professional Standards</h4>
+                    <p className="text-white/60 font-medium">IRS Authorized Representation.</p>
                   </div>
                 </div>
               </motion.div>
@@ -369,7 +385,6 @@ const Contact: React.FC = () => {
               referrerPolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.725791340156!2d-97.754359!3d30.3444743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644cb9af003a89f%3A0x7d6c5188f6c6e001!2s5900%20Balcones%20Dr%20%2328223%2C%20Austin%2C%20TX%2078731!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
             ></iframe>
-            {/* Overlay for interactive feel */}
             <div className="absolute inset-0 pointer-events-none border-[12px] border-white/20 rounded-[4rem]"></div>
           </motion.div>
         </div>

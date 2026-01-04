@@ -10,7 +10,11 @@ import {
   Landmark, Compass, BookOpen, Wallet, HardDrive, History
 } from 'lucide-react';
 
-const Home: React.FC = () => {
+interface HomeProps {
+  onOpenAuth: () => void;
+}
+
+const Home: React.FC<HomeProps> = ({ onOpenAuth }) => {
   return (
     <div className="overflow-hidden bg-white">
       {/* HERO SECTION */}
@@ -57,13 +61,21 @@ const Home: React.FC = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link to="/contact" className="bg-secondary text-white px-8 py-5 rounded-xl font-bold text-lg hover:bg-secondary-hover transition-all shadow-xl shadow-secondary/20 flex items-center justify-center group relative overflow-hidden">
+                {/* CTA 1: Get Free Consultation opens Popup */}
+                <button 
+                  onClick={onOpenAuth}
+                  className="bg-secondary text-white px-8 py-5 rounded-xl font-bold text-lg hover:bg-secondary-hover transition-all shadow-xl shadow-secondary/20 flex items-center justify-center group relative overflow-hidden"
+                >
                   <span className="relative z-10">Get Free Tax Consultation</span>
                   <ArrowRight className="ml-2 w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link to="/forms-links" className="bg-white text-primary border-2 border-primary/10 px-8 py-5 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center">
+                </button>
+                {/* CTA 2: Start Your Tax Filing opens Popup ONLY - NO REDIRECT */}
+                <button 
+                  onClick={onOpenAuth}
+                  className="bg-white text-primary border-2 border-primary/10 px-8 py-5 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center"
+                >
                   Start Your Tax Filing
-                </Link>
+                </button>
               </div>
             </div>
 
@@ -71,7 +83,7 @@ const Home: React.FC = () => {
               <div className="relative w-full aspect-square flex items-center justify-center">
                 <div className="relative w-4/5 aspect-[4/5] bg-white rounded-[3rem] shadow-2xl border border-gray-100 overflow-hidden transform rotate-3 card-3d">
                   <img 
-                    src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1200" 
+                    src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&q=80&w=1200" 
                     alt="Financial Landscape" 
                     className="w-full h-full object-cover grayscale opacity-40"
                   />
@@ -182,9 +194,12 @@ const Home: React.FC = () => {
                <p className="text-xl text-gray-600 leading-relaxed">
                  With over 5 years of U.S. tax experience, Preciseo Tax Services Inc has successfully assisted individuals and businesses with complex filings and proactive strategies.
                </p>
-               <Link to="/contact" className="inline-flex items-center text-secondary font-bold text-lg group">
+               <button 
+                 onClick={onOpenAuth}
+                 className="inline-flex items-center text-secondary font-bold text-lg group"
+               >
                  Book an Expert Session <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
-               </Link>
+               </button>
              </div>
 
              <div className="lg:w-1/2 relative">
@@ -268,7 +283,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* CORE SERVICES */}
+      {/* CORE SERVICES - AUDITED LINK MAPPING (STRICT) */}
       <section className="py-24 bg-primary text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-16 space-y-4">
@@ -278,24 +293,54 @@ const Home: React.FC = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "Individual Tax Filing", icon: UserCheck },
-              { title: "Business & Corporate Tax", icon: Building2 },
-              { title: "IRS Representation", icon: Landmark },
-              { title: "Tax Planning", icon: Compass },
-              { title: "Bookkeeping", icon: BookOpen },
-              { title: "Payroll Management", icon: Wallet },
-              { title: "ITIN Applications", icon: HardDrive },
-              { title: "Tax Amendments", icon: History }
+              { title: "Individual Tax Filing", icon: UserCheck, path: "/services/individual-tax-filing" },
+              { title: "Business Tax Filing", icon: Building2, path: "/services/business-tax-filing" },
+              { title: "FBAR & FATCA / Global Income Reporting", icon: Globe2, path: "/services/fbar-fatca" },
+              { title: "ITIN Application", icon: HardDrive, path: "/services/itin-application" },
+              { title: "Tax Planning", icon: Compass, path: "/services/tax-planning" },
+              { title: "Business Formation", icon: Landmark, path: "/services/business-formation" },
+              { title: "Payroll Processing", icon: Wallet, path: "/services/payroll-processing" },
+              { title: "Bookkeeping", icon: BookOpen, path: "/services/bookkeeping" }
             ].map((service, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all group flex flex-col justify-between h-full">
+              <Link 
+                key={idx} 
+                to={service.path}
+                className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all group flex flex-col justify-between h-full hover:-translate-y-2 duration-300"
+              >
                 <div>
                   <div className="w-14 h-14 bg-secondary/20 rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:bg-secondary group-hover:text-white transition-all">
                     <service.icon size={28} />
                   </div>
                   <h3 className="text-xl font-bold font-heading mb-4">{service.title}</h3>
                 </div>
-              </div>
+                <div className="flex items-center text-secondary font-bold text-sm mt-4">
+                  Learn More <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA SECTION - AUDITED BEHAVIOR */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10">
+          <h2 className="text-4xl md:text-6xl font-black font-heading text-primary leading-tight">Build a Smarter Financial Future <br /> <span className="text-secondary italic">Starting Today</span></h2>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            {/* Start Your Tax Filing opens popup ONLY */}
+            <button 
+              onClick={onOpenAuth}
+              className="bg-secondary text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-secondary-hover transition-all shadow-2xl hover:scale-105 active:scale-95"
+            >
+              Start Your Tax Filing
+            </button>
+            {/* Contact Our Experts links to /contact */}
+            <Link 
+              to="/contact" 
+              className="bg-primary text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-primary-light transition-all flex items-center justify-center shadow-xl"
+            >
+              Contact Our Experts
+            </Link>
           </div>
         </div>
       </section>

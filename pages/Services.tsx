@@ -34,9 +34,9 @@ const ServicesPage: React.FC = () => {
           {SERVICES.map((service, index) => {
             const Icon = IconMap[service.iconName] || ArrowRightCircle;
             let linkPath = '/services';
-            if (service.id === 'individual-filing') linkPath = '/services/individual-filing';
-            if (service.id === 'business-filing') linkPath = '/services/business-filing';
-            if (service.id === 'fbar-fbar') linkPath = '/services/global-reporting';
+            if (service.id === 'individual-filing') linkPath = '/services/individual-tax-filing';
+            if (service.id === 'business-filing') linkPath = '/services/business-tax-filing';
+            if (service.id === 'fbar-fbar') linkPath = '/services/fbar-fatca';
             if (service.id === 'itin-app') linkPath = '/services/itin-application';
             if (service.id === 'tax-planning') linkPath = '/services/tax-planning';
             if (service.id === 'business-formation') linkPath = '/services/business-formation';
